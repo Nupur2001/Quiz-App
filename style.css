@@ -46,6 +46,9 @@ body {
 /* .quizContainer ul li .input {
     margin: 0 1rem;
 } */
+.btn.hide {
+    display: none;
+}
 
 .btn {
     background-color: #8e44ad;
@@ -60,4 +63,28 @@ body {
     &:hover {
         background-color: rebeccapurple;
     }
+}
+
+.result .reloadBtn {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    display: block;
+    width: 100%;
+    padding: 2rem;
+    font-size: 1.5rem;
+    font-family: inherit;
+
+    &:hover {
+        background-color: rebeccapurple;
+    }
+}
+
+.quizContainer.new {
+    padding: 0rem;
+}
+
+.result h2 {
+    text-align: center;
+    padding: 2.3rem;
 }
