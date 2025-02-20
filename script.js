@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       correctAnswer: 1,
     },
   ];
-  let answer = document.querySelector(".answer");
+  let answer = document.querySelectorAll(".answer");
   let questions = document.querySelector(".question");
 
   let optionA = document.querySelector("#optionA");
@@ -43,8 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let optionC = document.querySelector("#optionC");
   let optionD = document.querySelector("#optionD");
   let btn = document.querySelector(".btn");
-  const currentQuiz = 0;
-  const score = 0;
+  let quizContainer=document.querySelector(".quizContainer")
+
+  let currentQuiz = 0;
+  let score = 0;
 
   function loadData() {
     const { question, options } = quizData[currentQuiz];
@@ -55,4 +57,44 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadData();
+  function deselectOption() {
+    answer.forEach((a) => (a.checked = false));
+  }
+  function getSelectedOption() {
+    // let answerIndex;
+    // answer.forEach((currentOption,index)=>{
+    //     if (currentOption.checked) {
+    //         answerIndex=index
+    //     }
+    // })
+    // return answerIndex
+
+    let answerElement = Array.from(answer);
+    return answerElement.findIndex((currentOption) => currentOption.checked);
+  }
+
+  btn.addEventListener("click", () => {
+    const selectedOptionIndex = getSelectedOption();
+    console.log(selectedOptionIndex);
+
+    if (selectedOptionIndex===quizData[currentQuiz].correctAnswer) {
+        score+=1
+        console.log("Score:", score)
+    }
+
+    currentQuiz++;
+    if (currentQuiz < quizData.length) {
+      deselectOption();
+      loadData();
+    }
+    else{
+        quizContainer.classList.add('new')
+        btn.classList.add("hide")
+       quizContainer.innerHTML= `<div div class='result'>
+       <h2>You answered ${score}/${quizData.length} questions correctly</h2>
+       <button class="reloadBtn" onclick=(location.reload())>Reload</button>
+       </div>`
+        
+    }
+  });
 });
