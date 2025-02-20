@@ -35,20 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
       correctAnswer: 1,
     },
   ];
+  let answer = document.querySelector(".answer");
+  let questions = document.querySelector(".question");
 
-  let [questions, optionA, optionB, optionC, optionD] =
-    document.querySelectorAll(".question,#optionA,#optionB,#optionC,#optionD");
-  let btn = document.querySelector("btn");
-  const curentQuiz = 0;
+  let optionA = document.querySelector("#optionA");
+  let optionB = document.querySelector("#optionB");
+  let optionC = document.querySelector("#optionC");
+  let optionD = document.querySelector("#optionD");
+  let btn = document.querySelector(".btn");
+  const currentQuiz = 0;
   const score = 0;
 
   function loadData() {
-    const { question, options } = quizData[curentQuiz];
+    const { question, options } = quizData[currentQuiz];
     questions.innerText = question;
-    options.forEach(
-      (currOptions, index) =>
-        (window[`option${index + 1}`].innerHTML=currOptions)
-    );
+    [optionA, optionB, optionC, optionD].forEach((currentOption, index) => {
+      currentOption.innerHTML = options[index];
+    });
   }
 
   loadData();
